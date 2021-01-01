@@ -1,10 +1,10 @@
 cc_library(
     name="Set1",
     hdrs=[
-    "string_util.h",
+    "set_1.h",
     ],
     srcs=[
-	"string_util.cpp",
+	"set_1.cpp",
 	],
     deps=[
         "@com_google_absl//absl/strings",
@@ -15,7 +15,7 @@ cc_library(
 cc_test(
     name = "Set1Test",
     srcs = [
-    	 "string_util_test.cpp",
+    	 "set_1_test.cpp",
     ],
     deps = ["//exercises/set1:Set1",
     "@com_google_absl//absl/strings",

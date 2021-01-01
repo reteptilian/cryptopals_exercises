@@ -1,11 +1,13 @@
-#include "exercises/set1/string_util.h"
+#include "exercises/set1/set_1.h"
 
 #include "absl/strings/string_view.h"
+#include "absl/strings/str_cat.h"
 
+#include <sstream>
+#include <iomanip>
 #include <iostream>
 
 namespace cryptopals {
-// namespace {
 
 uint8_t ConvertHexToInt(char hex) {
   if (hex <= '9') {
@@ -25,8 +27,8 @@ std::string ConvertHexToBytes(absl::string_view hex) {
   return result;
 }
 
-  const int kBitsPerByte = 8;
-  const int kBitsPerBase64Char = 6;
+const int kBitsPerByte = 8;
+const int kBitsPerBase64Char = 6;
 
 
 void SetBit(char& byte, int index, bool val) {
@@ -76,10 +78,28 @@ std::string ConvertBytesToBase64(absl::string_view bytes) {
   return result;
 }
   
-// } // namespace
-
 std::string ConvertHexToBase64(absl::string_view hex) {
   return ConvertBytesToBase64(ConvertHexToBytes(hex));
+}
+
+std::string ConvertBytesToHex(absl::string_view bytes) {
+  std::stringstream ss;
+  ss << std::hex;
+  for (int i = 0; i < bytes.size(); ++i) {
+    ss << std::setw(2) << std::setfill('0') << (int)(bytes[i]);
+  }
+  return ss.str();
+}
+
+std::string XorHex(absl::string_view hex1, absl::string_view hex2) {
+  std::string bytes1 = ConvertHexToBytes(hex1);
+  std::string bytes2 = ConvertHexToBytes(hex2);
+  std::string result_bytes;
+  for (int i = 0; i < bytes1.size(); ++i) {
+    result_bytes.push_back(
+        static_cast<uint8_t>(bytes1[i]) ^ static_cast<uint8_t>(bytes2[i]));
+  }
+  return ConvertBytesToHex(result_bytes);
 }
 
 }  // namespace cryptopals
