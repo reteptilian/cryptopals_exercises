@@ -102,4 +102,12 @@ std::string XorHex(absl::string_view hex1, absl::string_view hex2) {
   return ConvertBytesToHex(result_bytes);
 }
 
+/*
+std::string ByteToAscii(absl::string_view hex) {
+  std::string result;
+  for (int i = 0; i < hex.size(); ++i) {
+    result.push_back
+  }
+}
+*/
 }  // namespace cryptopals
